@@ -1,0 +1,20 @@
+<div class="text-lg font-bold mb-5">EDIT BEDSPACE</div>
+<form [formGroup]="formGroup">
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label> Description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        placeholder="Description"
+        autocomplete="off"
+      />
+    </mat-form-field>
+  </div>
+  <button mat-flat-button color="primary" (click)="save()">
+    <mat-icon>edit</mat-icon> Update
+  </button>
+  <button mat-raised-button (click)="cancel()" class="ml-2">
+    <mat-icon>cancel</mat-icon> Cancel
+  </button>
+</form>

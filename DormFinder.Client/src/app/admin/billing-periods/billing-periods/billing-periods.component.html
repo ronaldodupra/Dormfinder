@@ -1,0 +1,69 @@
+<div class="p-4">
+  <h1 class="mat-headline">Billing Periods</h1>
+  <a mat-raised-button color="primary" (click)="newBillingPeriod()">
+    NEW BILLING PERIOD
+  </a>
+  <div class="mat-elevation-z1">
+    <table
+      mat-table
+      matSort
+      (matSortChange)="sortdata($event)"
+      [dataSource]="dataSource"
+      class="w-full"
+    >
+      <ng-container matColumnDef="billingMonth">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Billing Month</th>
+        <td mat-cell *matCellDef="let billing">
+          {{ billing.billingMonth | date: "MMMM y" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="beginDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Begin Date</th>
+        <td mat-cell *matCellDef="let billing">
+          {{ billing.beginDate | date: "MMMM d, y" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+        <td mat-cell *matCellDef="let billing">
+          {{ billing.endDate | date: "MMMM d, y" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+        <td mat-cell *matCellDef="let billing">
+          <a
+            mat-icon-button
+            matTooltip="Edit"
+            (click)="editBillingPeriod(billing)"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            matTooltip="View"
+            [routerLink]="['/admin', 'billing', billing.id]"
+          >
+            <mat-icon>remove_red_eye</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div *ngIf="dataSource?.data.length === 0" class="app-no-data">
+      No Billing Period found
+    </div>
+
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      (page)="page($event)"
+    ></mat-paginator>
+  </div>
+</div>

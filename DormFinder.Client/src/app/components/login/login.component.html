@@ -1,0 +1,119 @@
+<div class="flex">
+  <mat-card class="login__margin_right">
+    <div class="login__header">
+      <h2>WELCOME</h2>
+    </div>
+
+    <form
+      [formGroup]="form"
+      autocomplete="on"
+      (ngSubmit)="login()"
+      class="login__form mb-4"
+    >
+      <div *ngIf="loginError != null" class="error">
+        <div class="flex items-center justify-center">
+          <mat-icon class="m-align-middle">cancel</mat-icon>
+          <ng-container [ngSwitch]="loginError">
+            <ng-container *ngSwitchCase="'BadCredentials'">
+              Either the email or password is incorrect.
+            </ng-container>
+            <ng-container *ngSwitchCase="'Server error'"
+              >Could not connect to the server</ng-container
+            >
+          </ng-container>
+        </div>
+      </div>
+
+      <mat-form-field class="login__field" appearance="outline" color="accent">
+        <!-- <mat-icon matPrefix>email</mat-icon> -->
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Email"
+          type="email"
+          name="email"
+          id="login-email"
+        />
+        <mat-error>Email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="login__field" appearance="outline" color="accent">
+        <!-- <mat-icon matPrefix>lock</mat-icon> -->
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          autocomplete="off"
+          placeholder="Password"
+          id="login-password"
+        />
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+
+      <div class="login__actions_login">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loggingIn | async"
+        >
+          LOGIN
+        </button>
+      </div>
+
+      <div class="login__actions_forgotpassword">
+        <button
+          mat-button
+          (click)="forgotPassword()"
+          [disabled]="loggingIn | async"
+          type="button"
+        >
+          Forgot password?
+        </button>
+      </div>
+    </form>
+
+    <div class="container">
+      <div class="line"><mat-divider inset="true"></mat-divider></div>
+      <div class="text mat-typography">Or</div>
+      <div class="line"><mat-divider inset="true"></mat-divider></div>
+    </div>
+
+    <form
+      ngNoForm
+      id="external-account"
+      method="post"
+      action="https://localhost:5001/ExternalLogin?provider=Facebook"
+    >
+      <button class="fb btn" type="submit" name="provider" value="Facebook">
+        <i class="fa fa-facebook fa-fw"></i>Continue with Facebook
+      </button>
+    </form>
+
+    <form
+      ngNoForm
+      id="external-account"
+      method="post"
+      action="https://localhost:5001/ExternalLogin?provider=Google"
+    >
+      <button class="google btn" type="submit" name="provider" value="Google">
+        <i class="fa fa-google fa-fw"></i>Continue with Google
+      </button>
+    </form>
+  </mat-card>
+
+  <mat-card class="login flex_column">
+    <div class="login__actions_login">Don't have an account?</div>
+    <div class="login__actions_login">
+      <button
+        mat-button
+        mat-flat-button
+        class="signup"
+        color="accent"
+        (click)="signup()"
+      >
+        SIGN UP
+      </button>
+    </div>
+  </mat-card>
+</div>

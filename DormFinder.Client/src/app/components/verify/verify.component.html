@@ -1,0 +1,19 @@
+
+<div class="center" *ngIf="verified != null">
+    <mat-card>
+        <mat-card-title class="_center">
+            <div *ngIf="verified"> <h2>Email Verified.</h2></div>
+            <div *ngIf="verified == false"> <h2>Error Verfying The Email.</h2></div>
+        </mat-card-title>
+        
+        <div class="_center">
+            <button
+            mat-raised-button
+            color="primary"
+            (click)="login()"
+            >
+            Done
+            </button>
+        </div>        
+    </mat-card>
+</div>

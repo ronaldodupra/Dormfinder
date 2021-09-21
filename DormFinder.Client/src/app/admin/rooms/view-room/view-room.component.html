@@ -1,0 +1,211 @@
+<div class="p-4">
+  <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+    <mat-tab label="Overview">
+      <div class="p-5">
+        <div class="float-right">
+          <a
+            [routerLink]="['/admin', 'rooms', roomDetails?.id, 'edit']"
+            class="mr-2"
+            mat-flat-button
+            color="primary"
+            ><mat-icon>create</mat-icon> EDIT ROOM</a
+          >
+        </div>
+        <div class="pt-5 mt-5">
+          <div class="flex">
+            <div class="pr-3 md:w-1/2 xl:w-3/4">
+              <div class="max-w-full rounded overflow-hidden shadow-lg">
+                <div class="p-4 mat-typography">
+                  <div class="font-bold text-xl mb-2">Room Details</div>
+
+                  <p class="field">
+                    <span class="field-label">Name</span>
+                    <span class="field-value">{{ roomDetails?.roomName }}</span>
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Room No.</span>
+                    <span class="field-value">{{
+                      roomDetails?.roomNumber
+                    }}</span>
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Building Name</span>
+                    <span class="field-value">{{ buildingname }}</span>
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Description</span>
+                    <span class="field-value">{{
+                      roomDetails?.description
+                    }}</span>
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Price</span>
+                    <span class="field-value"
+                      >₱ {{ roomDetails?.basicRent | number: "0.2" }}</span
+                    >
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Security Deposit</span>
+                    <span class="field-value"
+                      >₱
+                      {{ roomDetails?.securityDeposit | number: "0.2" }}</span
+                    >
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label">Advance Rent</span>
+                    <span class="field-value">{{
+                      roomDetails?.advanceRent
+                    }}</span>
+                  </p>
+
+                  <p class="field">
+                    <span class="field-label"># of Occupants</span>
+                    <span class="field-value">{{ roomDetails?.occupant }}</span>
+                  </p>
+
+                  <div class="px-6 pt-4 pb-2">
+                    Inclusions:
+                    <ng-container *ngFor="let rInclusion of roomInclusion">
+                      <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                        >{{ rInclusion.inclusion.inclusionName }}</span
+                      >
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mat-elevation-z1 p-4 md:w-1/2 xl:w-1/4">
+              <mat-list>
+                <div mat-subheader class="font-bold text-xl mb-2">Bedspace</div>
+                <ng-container *ngFor="let bed of bedSpace">
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>single_bed</mat-icon>
+                    <div mat-line>Type: {{ bed.description }}</div>
+                    <div mat-line>
+                      Availability:
+                      {{ bed.isOccupied ? "Occupied" : "Available" }}
+                    </div>
+                    <div mat-line>
+                      Status: {{ bed.isActive ? "Active" : "Inactive" }}
+                    </div>
+                  </mat-list-item>
+                </ng-container>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Bedspace">
+      <ng-container *ngFor="let bed of bedSpace">
+        <div
+          class="mat-elevation-z1 mt-2 mb-4 p-5 {{
+            bed.isActive ? '' : 'bg-gray-200'
+          }}"
+        >
+          <div class="flex">
+            <div class="w-3/4">
+              {{ bed.description }}
+              <div>
+                <small>
+                  Availability: {{ bed.isOccupied ? "Occupied" : "Available" }}
+                </small>
+              </div>
+              <div>
+                <small
+                  >Status: {{ bed.isActive ? "Active" : "Inactive" }}</small
+                >
+              </div>
+            </div>
+            <div class="w-1/4">
+              <div class="mt-3">
+                <a
+                  mat-icon-button
+                  matTooltip="Rename Bedspace"
+                  (click)="editBedspace(bed.id, bed.description)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </a>
+                <a
+                  mat-icon-button
+                  matTooltip="{{ bed.isActive ? 'Disable' : 'Enable' }}"
+                  (click)="updateBedStatus(bed.id, bed.isActive ? false : true)"
+                >
+                  <mat-icon
+                    >{{ bed.isActive ? "toggle_on" : "toggle_off" }}
+                  </mat-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </mat-tab>
+
+    <mat-tab label="Room Images">
+      <div class="container mx-auto">
+        <div class="flex flex-wrap justify-center">
+          <ng-container *ngFor="let image of roomPics">
+            <div class="xl:w-1/4 p-1">
+              <div class="mat-elevation-z1 hover:bg-gray-200">
+                <div class="justify-center flex relative">
+                  <img
+                    src="api/files/{{ image.fileEntry.id }}"
+                    class="w-full h-56"
+                  />
+                  <div class="absolute right-0 mt-1">
+                    <button
+                      mat-icon-button
+                      class="outline-none"
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Example icon-button with a menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button
+                        mat-menu-item
+                        (click)="setThumbnail(image.fileEntry.id)"
+                        class="outline-none"
+                      >
+                        <mat-icon>wallpaper</mat-icon>
+                        <span>Set as Thumbnail</span>
+                      </button>
+                      <button
+                        mat-menu-item
+                        (click)="delete(image.fileEntry.id)"
+                        class="outline-none"
+                      >
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                      <button mat-menu-item class="outline-none">
+                        <mat-icon>south</mat-icon>
+                        <span>Download</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                  <ng-container *ngIf="image.isThumbnail">
+                    <div class="absolute left-0 bottom-0 mt-1">
+                      <mat-icon class="text-white ml-1 mb-1 text-4xl"
+                        >wallpaper</mat-icon
+                      >
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,14 @@
+@use "~@angular/material/theming" as *;
+
+$primary-palette: mat-palette($mat-grey, 900);
+$accent-palette: mat-palette($mat-red, 900);
+$warn-palette: mat-palette($mat-red);
+
+$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+
+$typography: mat-typography-config(
+  $font-family: "Roboto, 'Helvetica Neue', monospace",
+);
+
+@include mat-core();
+@include angular-material-theme($theme);

@@ -1,0 +1,20 @@
+<ng-container *ngIf="building">
+  <div class="p-4">
+    <div class="mat-elevation-z1 p-4 xl:w-1/2">
+      <h1 class="mat-headline">Edit Building</h1>
+      <app-building-form [building]="building"></app-building-form>
+      <button
+        mat-flat-button
+        type="button"
+        (click)="save()"
+        color="primary"
+        class="mr-2"
+      >
+        SAVE CHANGES
+      </button>
+      <button mat-stroked-button type="button" (click)="cancel()">
+        CANCEL
+      </button>
+    </div>
+  </div>
+</ng-container>

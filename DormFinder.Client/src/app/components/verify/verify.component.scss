@@ -1,0 +1,26 @@
+.center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card.card {
+  min-width: 20%;
+  min-height: 20%;
+}
+
+.right-btn {
+  position: relative;
+  float: right;
+}
+
+._center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}

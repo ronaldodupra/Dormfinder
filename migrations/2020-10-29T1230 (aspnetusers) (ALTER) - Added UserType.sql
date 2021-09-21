@@ -1,0 +1,3 @@
+ALTER TABLE `aspnetusers`
+	ADD COLUMN `UserType` VARCHAR(255) NULL DEFAULT NULL AFTER `City`,
+	DROP COLUMN `UserType`;

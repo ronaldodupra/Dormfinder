@@ -1,0 +1,61 @@
+<form [formGroup]="form" class="mat-typography">
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Comments</mat-label>
+      <textarea
+        matInput
+        formControlName="comments"
+        matTextareaAutosize
+        matAutosizeMinRows="4"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Default Charge</mat-label>
+      <input
+        matInput
+        type="number"
+        autocomplete="off"
+        formControlName="defaultCharge"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="full">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Charge Type</mat-label>
+      <mat-select formControlName="chargeTypeId">
+        <mat-option
+          *ngFor="let chargeType of chargeTypes"
+          [value]="chargeType.id"
+        >
+          {{ chargeType.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Billing Statement Order</mat-label>
+      <input
+        matInput
+        type="number"
+        autocomplete="off"
+        formControlName="billingStatementOrder"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="w-full">
+    <div>
+      <mat-label>Is Vatable</mat-label>
+    </div>
+    <mat-radio-group aria-label="Is Vat" formControlName="isVat">
+      <mat-radio-button [value]="true">Yes</mat-radio-button>
+      <mat-radio-button [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</form>

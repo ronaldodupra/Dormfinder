@@ -1,0 +1,253 @@
+<div class="p-4">
+  <div class="flex">
+    <div class="w-3/5">
+      <div class="mat-elevation-z1">
+        <div class="p-3">
+          <div class="float-right">
+            <div class="flex items-center">
+              <mat-icon class="mr-1">access_time</mat-icon>
+              {{ lead?.createdAt | dateAgo }}
+            </div>
+          </div>
+          <div class="flex items-center">
+            <mat-icon>account_circle</mat-icon>
+            <div class="text-blue-600 text-2xl">
+              {{ lead?.firstName }} {{ lead?.lastName }}
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="bg-gray-100 p-5 mt-3">
+            <div class="text-gray-800">
+              {{ lead?.message }}
+            </div>
+          </div>
+
+          <div class="p-3">
+            <div class="flex item-center">
+              <mat-icon>local_phone</mat-icon> {{ lead?.number }}
+            </div>
+          </div>
+          <div class="p-3">
+            <div class="flex item-center">
+              <mat-icon>email</mat-icon> {{ lead?.email }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mat-elevation-z1 mt-5 p-4" *ngIf="lead?.contract != null">
+        <span class="font-bold text-lg">Contract</span>
+        <div class="flex">
+          <div class="w-1/2">
+            <mat-list role="list">
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Move-In Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.moveInDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Basic Rent</span>
+                  <span class="field-value">{{
+                    lead?.contract.basicRent
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Bedspace</span>
+                  <span class="field-value">{{
+                    lead?.contract.bedSpaceNumber
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Created At</span>
+                  <span class="field-value">{{
+                    lead?.contract.createdAt | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Early Termination Fee</span>
+                  <span class="field-value">{{
+                    lead?.contract.earlyTerminationFee
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Move-Out Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.moveOutDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Rental Effectivity Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.rentalEffectivityDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Rental End Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.rentalEndDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Charges</span>
+                  <span
+                    *ngFor="let charge of lead?.contract.contractCharge"
+                    class="field-value"
+                    >{{ charge.charge.billingStatementOrder }} -
+                    {{ charge.charge.comments }}</span
+                  >
+                </p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div class="w-1/2">
+            <mat-list>
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Reservation Expiration Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.reservationExpirationDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Reservation Start Date</span>
+                  <span class="field-value">{{
+                    lead?.contract.reservationStartDate | date: "MMMM d, y"
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">RFID Deposit</span>
+                  <span class="field-value">{{
+                    lead?.contract.rfidDeposit
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label"> Security Deposit</span>
+                  <span class="field-value">{{
+                    lead?.contract.securityDeposit
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Unit #</span>
+                  <span class="field-value">{{
+                    lead?.contract.unitNumber
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Status</span>
+                  <span class="field-value">{{ lead?.contract.status }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Tenant</span>
+                  <span class="field-value">{{
+                    lead?.contract.tenantName
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Electric Utility</span>
+                  <span class="field-value">{{
+                    lead?.contract.utilitiesElectricity
+                  }}</span>
+                </p>
+              </mat-list-item>
+
+              <mat-list-item role="listitem">
+                <p class="field mat-typography">
+                  <span class="field-label">Water Utility</span>
+                  <span class="field-value">{{
+                    lead?.contract.utilitiesWater
+                  }}</span>
+                </p>
+              </mat-list-item>
+              <div class="p-3 float-right">
+                <button
+                  *ngIf="!lead.contract.approve"
+                  mat-raised-button
+                  (click)="approve()"
+                >
+                  Approve
+                </button>
+                <span *ngIf="lead.contract.approve">Approved</span>
+              </div>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-2/5">
+      <div class="p-3">
+        <span class="text-2xl">Requested Property</span>
+        <div class="">Property: {{ lead?.room.building.name }}</div>
+        <div class="">
+          Address: {{ lead?.room.building.address.addressLine1 }}
+          {{ lead?.room.building.address.addressLine2 }}
+          {{ lead?.room.building.address.city }}
+          {{ lead?.room.building.address.province }}
+        </div>
+        <div>Room Name: {{ lead?.room.roomName }}</div>
+        <div>Room Image:</div>
+        <ng-container *ngIf="lead?.room.roomPics.length == 0; else hasImage">
+          <div class="bg-gray-100 flex items-center h-64 justify-center">
+            <mat-icon>image_not_supported</mat-icon> No Room Image
+          </div>
+        </ng-container>
+        <ng-template #hasImage>
+          <div class="bg-gray-100 flex">
+            <div class="w-1/3" *ngFor="let pic of lead?.room.roomPics">
+              <img
+                src="api/files/{{ pic.fileEntryId }}"
+                alt=""
+                class="w-full h-full"
+              />
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

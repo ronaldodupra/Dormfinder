@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DormFinder.Web", "DormFinder.Web\DormFinder.Web.csproj", "{8E734FFB-777E-4A57-BA4B-0D434CAD6A0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DormFinder.Web.FunctionalTests", "DormFinder.Web.FunctionalTests\DormFinder.Web.FunctionalTests.csproj", "{A4FCE3D6-A66B-4E63-8175-41217F7A5242}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56EEF13F-E9C6-4FFF-B6A3-8A5E7E3AA8BB}"
+	ProjectSection(SolutionItems) = preProject
+		.runsettings = .runsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E734FFB-777E-4A57-BA4B-0D434CAD6A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E734FFB-777E-4A57-BA4B-0D434CAD6A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E734FFB-777E-4A57-BA4B-0D434CAD6A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E734FFB-777E-4A57-BA4B-0D434CAD6A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4FCE3D6-A66B-4E63-8175-41217F7A5242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4FCE3D6-A66B-4E63-8175-41217F7A5242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4FCE3D6-A66B-4E63-8175-41217F7A5242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4FCE3D6-A66B-4E63-8175-41217F7A5242}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5AAE09E-1F51-4B7E-AA46-659D24330B8F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 2vw;
+    margin-bottom: 18px;
+  }
+  
+  .image {
+    height: 150px;
+    widows: 150px;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .error {
+    font-weight: bold;
+    color: #b71c1c;
+  }
+  

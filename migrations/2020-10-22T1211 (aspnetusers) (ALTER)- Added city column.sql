@@ -1,0 +1,3 @@
+ALTER TABLE `aspnetusers`
+	ADD COLUMN `City` VARCHAR(255) NOT NULL DEFAULT 'Active' AFTER `Status`,
+	DROP COLUMN `City`;

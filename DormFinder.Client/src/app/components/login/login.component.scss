@@ -1,0 +1,132 @@
+// @import "styles/variables";
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: app-color(primary);
+}
+
+.login {
+  min-width: 400px;
+  //   padding: $app-space-4;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 4px;
+  }
+
+  &__field {
+    display: block;
+  }
+
+  &__actions {
+    position: relative;
+    display: flex;
+
+    // align-items: center;
+    // margin-top: $app-space-2;
+
+    &_login {
+      display: flex;
+      justify-content: center;
+
+      button {
+        margin-right: app-space(1);
+
+        width: 80%;
+        align-self: center;
+        display: inline-block;
+      }
+    }
+
+    &_forgotpassword {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        margin-right: app-space(1);
+
+        width: 40%;
+        align-self: center;
+        display: inline-block;
+      }
+    }
+  }
+  &__margin_right {
+    min-width: 400px;
+    margin-right: 5px;
+  }
+}
+
+.flex {
+  display: flex;
+
+  &_column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.error {
+  color: #b71c1c;
+  //   padding: $app-space-1;
+  //   margin-bottom: $app-space-1;
+}
+.signup {
+  min-width: 300px;
+  align-self: center;
+  // margin-left: 45px;
+  // margin-top: 25px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 14px;
+  opacity: 1;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* add appropriate colors to fb and google buttons */
+.fb {
+  background-color: #3b5998;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  width: 40%;
+  flex: 1;
+}
+
+.text {
+  padding-left: 10px;
+  padding-right: 10px;
+}

@@ -1,0 +1,34 @@
+<span class="text-gray-700 font-bold">Find Property</span>
+
+<form [formGroup]="form" (ngSubmit)="search()">
+  <div class="flex -mx-2">
+    <div class="w-11/12">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Search Property</mat-label>
+        <input
+          matInput
+          #autoTrigger="matAutocompleteTrigger"
+          type="text"
+          placeholder="Search Property"
+          [matAutocomplete]="auto"
+          formControlName="search"
+          matInput
+        />
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            <mat-icon>location_on</mat-icon> {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="w-1/12 p-2">
+      <button type="submit" mat-flat-button color="accent" class="w-full h-12">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+</form>

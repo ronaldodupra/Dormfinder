@@ -1,0 +1,185 @@
+<form [formGroup]="form" class="mat-typography">
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" required />
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        matTextareaAutosize
+        matAutosizeMinRows="4"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Building Type</mat-label>
+    <mat-select formControlName="buildingType">
+      <mat-option
+        *ngFor="let buildingType of buildingTypes"
+        [value]="buildingType.description"
+      >
+        {{ buildingType.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Number of Floor</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="floorNumber"
+        (input)="testing()"
+        max="30"
+        autocomplete="off"
+      />
+    </mat-form-field>
+  </div>
+
+  <mat-divider class="mb-4"></mat-divider>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <google-map [center]="center" (mapClick)="addMarker($event)">
+      <ng-container *ngIf="marker">
+        <map-marker
+          [position]="marker.position"
+          [clickable]="true"
+          (mapClick)="removeMarker($event)"
+        ></map-marker>
+      </ng-container>
+    </google-map>
+
+    <div class="flex -mx-2">
+      <div class="w-1/2">
+        <mat-form-field appearance="outline" class="w-full px-2">
+          <mat-label>City/Municipality</mat-label>
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="cityAuto"
+            formControlName="city"
+          />
+          <mat-autocomplete #cityAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let city of filteredCities | async"
+              [value]="city.description"
+            >
+              {{ city.description }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="w-1/2">
+        <mat-form-field appearance="outline" class="w-full px-2">
+          <mat-label>Province</mat-label>
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="provinceAuto"
+            formControlName="province"
+          />
+          <mat-autocomplete #provinceAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let province of filteredProvinces | async"
+              [value]="province.description"
+            >
+              {{ province.description }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Street Address</mat-label>
+        <input matInput type="text" formControlName="addressLine1" />
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Floor/Dept/Apartment</mat-label>
+        <input matInput type="text" formControlName="addressLine2" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div formArrayName="nearByEntries">
+    <h3>Nearby Place</h3>
+    <div>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          [formControl]="addNearbyPlaceControl"
+          (keydown.enter)="addNearbyPlace()"
+          placeholder="Add Nearby Place..."
+        />
+      </mat-form-field>
+    </div>
+    <div class="ml-5">
+      <ul
+        class="list-disc"
+        *ngFor="let nearbyPlace of nearByEntries.controls; let i = index"
+      >
+        <li class="p-2">
+          {{ nearbyPlace.value }}
+          <button class="float-right">
+            <mat-icon class="text-red-700" (click)="removeNearByPlace(i)"
+              >close</mat-icon
+            >
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <mat-divider class="mb-4"></mat-divider>
+
+  <div formArrayName="amenities">
+    <h3>Amenities</h3>
+    <div>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          [formControl]="addAmenityControl"
+          (keydown.enter)="addAmenity()"
+          placeholder="Add amenity..."
+        />
+      </mat-form-field>
+    </div>
+    <div *ngFor="let amenity of amenities.controls; let i = index">
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput [formControlName]="i" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-divider class="mb-4"></mat-divider>
+
+  <div class="mb-4">
+    <h3>Images</h3>
+    <app-file-uploader
+      (upload)="upload($event)"
+      class="mb-4"
+    ></app-file-uploader>
+    <div class="flex flex-wrap">
+      <app-file-upload
+        class="mr-4"
+        *ngFor="let upload of uploads"
+        [file]="upload.file"
+        [progress]="upload.progress"
+      ></app-file-upload>
+    </div>
+  </div>
+</form>

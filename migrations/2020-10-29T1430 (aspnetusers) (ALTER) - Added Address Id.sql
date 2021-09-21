@@ -1,0 +1,2 @@
+ALTER TABLE `aspnetusers`
+	ADD COLUMN `AddressId` INT NULL DEFAULT NULL AFTER `UserType`;

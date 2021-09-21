@@ -1,0 +1,2 @@
+ALTER TABLE `aspnetusers`
+	CHANGE COLUMN `City` `City` VARCHAR(255) NULL DEFAULT NULL AFTER `Status`;

@@ -1,0 +1,11 @@
+<input
+  #file
+  type="file"
+  hidden
+  multiple
+  accept="image/*"
+  (change)="onSelect($event.target.files)"
+/>
+<button mat-raised-button type="button" (click)="file.click()">
+  BROWSE...
+</button>

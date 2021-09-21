@@ -1,0 +1,60 @@
+.dox-header {
+  padding-top: 18px;
+  flex: 0 0 108px;
+  padding-left: 36px;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+
+.dox-content-panel {
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+}
+
+.content-area {
+  flex: 1 1 auto;
+}
+.dox-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  border-top: 1px solid transparent;
+  height: 100%;
+}
+
+.dox-content .dox-content-wrapper {
+  padding-left: 36px;
+  padding-top: 6px;
+  padding-bottom: 96px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.dox-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.clr-control-container {
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+clr-button-group {
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}

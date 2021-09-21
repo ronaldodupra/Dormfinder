@@ -1,0 +1,16 @@
+<div class="p-4">
+  <div class="mat-elevation-z1 p-4 xl:w-1/2">
+    <h1 class="mat-headline">Add Room</h1>
+    <app-room-form></app-room-form>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="saveRoom()"
+      color="primary"
+      class="mr-2"
+    >
+      ADD ROOM
+    </button>
+    <button mat-stroked-button type="button" (click)="cancel()">CANCEL</button>
+  </div>
+</div>

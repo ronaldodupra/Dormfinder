@@ -1,0 +1,40 @@
+<div class="p-4">
+  <div>
+    <h1 class="mat-headline">
+      My Account
+      <a
+        mat-icon-button
+        matTooltip="Edit"
+        [routerLink]="['/admin', 'my-account', 'edit']"
+      >
+        <mat-icon>edit</mat-icon>
+      </a>
+    </h1>
+  </div>
+
+  <mat-card class="bottom-margin">
+    <div class="right">
+      <img
+        class="image"
+        *ngIf="user"
+        src="/api/files/{{ user?.originalImageId }}"
+      />
+    </div>
+
+    <h2 class="mat-headline">Details</h2>
+
+    <div class="w-half">First Name: {{ user?.firstName }}</div>
+    <div class="w-half">Last Name: {{ user?.lastName }}</div>
+    <div class="w-half">Gender: {{ user?.gender }}</div>
+    <div class="w-half">Account Status: {{ user?.status }}</div>
+    <div class="w-half">Verfied At: {{ user?.verifiedAt }}</div>
+  </mat-card>
+
+  <mat-card>
+    <h2 class="mat-headline">Address</h2>
+    <div class="w-half">City: {{ user?.address.city }}</div>
+    <div class="w-half">Province: {{ user?.address.province }}</div>
+    <div class="w-half">Address 1: {{ user?.address.addressLine1 }}</div>
+    <div class="w-half">Address 2: {{ user?.address.addressLine2 }}</div>
+  </mat-card>
+</div>

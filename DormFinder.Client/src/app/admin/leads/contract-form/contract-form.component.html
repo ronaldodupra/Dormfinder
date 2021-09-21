@@ -1,0 +1,265 @@
+<form [formGroup]="form" class="mat-typography">
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Move In Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="moveInDate"
+          formControlName="moveInDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="moveInDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #moveInDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Move Out Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="moveOutDate"
+          formControlName="moveOutDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="moveOutDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #moveOutDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Rental Effectivity Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="rentalEffectivityDate"
+          formControlName="rentalEffectivityDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="rentalEffectivityDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #rentalEffectivityDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Rental End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="rentalEndDate"
+          formControlName="rentalEndDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="rentalEndDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #rentalEndDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Reservation Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="reservationStartDate"
+          formControlName="reservationStartDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="reservationStartDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #reservationStartDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Reservation Expiration Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="reservationExpirationDate"
+          formControlName="reservationExpirationDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="reservationExpirationDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #reservationExpirationDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Allowable Reservation Days </mat-label>
+        <input
+          matInput
+          type="number"
+          autocomplete="off"
+          formControlName="allowableReservationDays"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Early Termination Fee </mat-label>
+        <input
+          matInput
+          type="number"
+          autocomplete="off"
+          formControlName="earlyTerminationFee"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Tenant Name </mat-label>
+    <input
+      matInput
+      type="text"
+      autocomplete="off"
+      formControlName="tenantName"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Room</mat-label>
+    <mat-select formControlName="roomId">
+      <mat-option *ngFor="let room of rooms" [value]="room.id">
+        {{ room.building.name }} - {{ room.roomName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Unit Number </mat-label>
+    <input
+      matInput
+      type="text"
+      autocomplete="off"
+      formControlName="unitNumber"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> BedSpace Number </mat-label>
+    <input
+      matInput
+      type="text"
+      autocomplete="off"
+      formControlName="bedSpaceNumber"
+    />
+  </mat-form-field>
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Security Deposit </mat-label>
+        <input
+          matInput
+          type="number"
+          autocomplete="off"
+          formControlName="securityDeposit"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> RFID Deposit </mat-label>
+        <input
+          matInput
+          type="number"
+          autocomplete="off"
+          formControlName="rfidDeposit"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Utilities Electricity </mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="off"
+          formControlName="utilitiesElectricity"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Utilities Water </mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="off"
+          formControlName="utilitiesWater"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Basic Rent </mat-label>
+    <input
+      matInput
+      type="number"
+      autocomplete="off"
+      formControlName="basicRent"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Status </mat-label>
+    <input matInput type="text" autocomplete="off" formControlName="status" />
+  </mat-form-field>
+
+  <div formArrayName="contractCharge">
+    <h3>Charges</h3>
+    <div>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Charge</mat-label>
+        <mat-select
+          [formControl]="addChargeControl"
+          (selectionChange)="addCharge()"
+        >
+          <mat-option *ngFor="let charge of charges" [value]="charge">
+            {{ charge.billingStatementOrder }} - {{ charge.comments }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="ml-5">
+      <ul
+        class="list-disc"
+        *ngFor="let charge of contractCharge.controls; let i = index"
+      >
+        <li class="p-2">
+          {{ charge.value.billingStatementOrder }} - {{ charge.value.comments }}
+          <button class="float-right">
+            <mat-icon class="text-red-700" (click)="removeCharge(i)"
+              >close</mat-icon
+            >
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,76 @@
+<ng-container *ngIf="buildingDetails != null">
+  <div class="p-4 mat-typography">
+    <h1 class="mat-headline">View Building</h1>
+
+    <div class="r-btn">
+      <a
+        [routerLink]="['/admin', 'buildings', buildingDetails?.id, 'edit']"
+        class="mr-2"
+        mat-flat-button
+        color="primary"
+        ><mat-icon>create</mat-icon> Edit Building</a
+      >
+    </div>
+
+    <div class="mat-elevation-z1 p-4 mb-4">
+      <h2>Building Details</h2>
+
+      <p class="field">
+        <span class="field-label">Name</span>
+        <span class="field-value">{{ buildingDetails?.name }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Description</span>
+        <span class="field-value">{{ buildingDetails?.description }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Building Type</span>
+        <span class="field-value">{{ buildingDetails?.buildingType }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Number of Floor</span>
+        <span class="field-value">{{ buildingDetails?.floors.length }}</span>
+      </p>
+    </div>
+
+    <div class="mat-elevation-z1 p-4 mb-4">
+      <h2>Address</h2>
+
+      <p class="field">
+        <span class="field-label">Street Address</span>
+        <span class="field-value">{{
+          buildingDetails?.address.addressLine1
+        }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Floor/Dept/Apartment</span>
+        <span class="field-value">{{
+          buildingDetails?.address.addressLine2
+        }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">City</span>
+        <span class="field-value">{{ buildingDetails?.address.city }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Province</span>
+        <span class="field-value">{{ buildingDetails?.address.province }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Nearby Places</span>
+        <span
+          class="field-value"
+          *ngFor="let place of buildingDetails.buildingNearbyPlaces"
+          >{{ place.place }}</span
+        >
+      </p>
+    </div>
+  </div>
+</ng-container>

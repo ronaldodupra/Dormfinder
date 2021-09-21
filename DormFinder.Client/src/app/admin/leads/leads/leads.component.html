@@ -1,0 +1,108 @@
+<div class="p-4">
+  <h1 class="mat-headline">Leads</h1>
+
+  <div class="mat-elevation-z1">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="w-full"
+      (matSortChange)="sortdata($event)"
+    >
+      <ng-container matColumnDef="from">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sender</th>
+        <td mat-cell *matCellDef="let lead">
+          <div class="flex items-center">
+            <img
+              class="rounded-full w-8 mr-2"
+              src="api/files/{{ lead.user.originalImageId }}"
+              alt="profile"
+            />
+            <span class="align-item">
+              {{ lead.firstName }} {{ lead.lastName }}
+            </span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="received">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Received</th>
+        <td mat-cell *matCellDef="let lead">
+          {{ lead.createdAt | dateAgo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="property">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Requested Property
+        </th>
+        <td mat-cell *matCellDef="let lead">
+          {{ lead.room.building.address.addressLine1 }}
+          {{ lead.room.building.address.addressLine2 }}
+          {{ lead.room.building.address.city }}
+          {{ lead.room.building.address.province }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</th>
+        <td mat-cell *matCellDef="let lead">
+          {{ lead.number }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let lead">
+          {{ lead.status }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+        <td mat-cell *matCellDef="let lead">
+          <ng-container *ngIf="lead.contract == null; else editContract">
+            <a
+              mat-icon-button
+              matTooltip="Make Contract"
+              [routerLink]="['/admin', 'leads', lead.id, 'newcontract']"
+              [state]="lead"
+            >
+              <mat-icon>playlist_add</mat-icon>
+            </a>
+          </ng-container>
+          <ng-template #editContract>
+            <a
+              mat-icon-button
+              matTooltip="Make Contract"
+              [routerLink]="[
+                '/admin',
+                'leads',
+                lead.id,
+                'editcontract',
+                lead.contract.id
+              ]"
+            >
+              <mat-icon>playlist_add_check</mat-icon>
+            </a>
+          </ng-template>
+          <a
+            mat-icon-button
+            matTooltip="View Lead"
+            [routerLink]="['/admin', 'leads', lead.id]"
+          >
+            <mat-icon>visibility</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      (page)="page($event)"
+    ></mat-paginator>
+  </div>
+</div>

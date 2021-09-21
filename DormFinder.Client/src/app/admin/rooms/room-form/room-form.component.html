@@ -1,0 +1,222 @@
+<mat-horizontal-stepper>
+  <mat-step>
+    <form [formGroup]="null">
+      <ng-template matStepLabel>Basics</ng-template>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>No of Beds</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Area</mat-label>
+        <input matInput type="text" />
+        <span matSuffix>sqm.</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Floor</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Images</ng-template>
+    <h3>Images</h3>
+    <app-file-uploader
+      (upload)="upload($event)"
+      class="mb-4"
+    ></app-file-uploader>
+    <div class="flex flex-wrap">
+      <app-file-upload
+        class="mr-4"
+        *ngFor="let upload of uploads"
+        [file]="upload.file"
+        [progress]="upload.progress"
+      ></app-file-upload>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <form [formGroup]="null">
+      <ng-template matStepLabel>Terms</ng-template>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Basic Rent</mat-label>
+        <input matInput type="number" />
+        <span matPrefix>₱&nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Security Deposit</mat-label>
+        <input matInput type="number" />
+        <span matPrefix>₱&nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Min Lease Duration</mat-label>
+        <input matInput type="number" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Max Lease Duration</mat-label>
+        <input matInput type="number" />
+      </mat-form-field>
+    </form>
+  </mat-step>
+  <mat-step><ng-template matStepLabel>Inclusions</ng-template> </mat-step>
+</mat-horizontal-stepper>
+
+<!-- <form [formGroup]="formGroup">
+  <div class="font-bold text-md mb-4">Building</div>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Select Building *</mat-label>
+    <mat-select
+      formControlName="buildingId"
+      (selectionChange)="floor($event.value)"
+    >
+      <mat-option *ngFor="let building of buildingData" [value]="building.id">{{
+        building.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <ng-container *ngIf="floorLength != 0">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Floor</mat-label>
+      <mat-select formControlName="floorId">
+        <mat-option *ngFor="let floor of floors" [value]="floor.id">{{
+          floor.description
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <mat-divider class="mb-4"></mat-divider>
+  <div class="font-bold text-md mb-4">Room</div>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Room Name *</mat-label>
+    <input
+      matInput
+      formControlName="roomName"
+      placeholder="Room Name"
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Room Type *</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let rType of roomTypeData" [value]="rType.id">
+            {{ rType.roomTypeName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Room Number</mat-label>
+        <input
+          matInput
+          formControlName="roomNumber"
+          placeholder="Room Number"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Add Inclusion</mat-label>
+    <mat-select formControlName="roomInclusions" multiple>
+      <mat-option
+        *ngFor="let inclusionData of inclusionData"
+        [value]="inclusionData.id"
+        >{{ inclusionData.inclusionName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-divider class="mb-4"></mat-divider>
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Square Meter</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="area"
+          placeholder="Square Meter"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label>Number of Occupant</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="occupant"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Price</mat-label>
+    <input
+      type="number"
+      matInput
+      formControlName="basicRent"
+      placeholder="Basic Rent"
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <div class="flex -mx-2">
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Security Deposit</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="securityDeposit"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="w-1/2">
+      <mat-form-field appearance="outline" class="w-full px-2">
+        <mat-label> Advance Rent</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="advanceRent"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label> Description</mat-label>
+    <textarea matInput type="text" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-divider class="mb-4"></mat-divider>
+
+  <div class="mb-4">
+    <h3>Images</h3>
+    <app-file-uploader
+      (upload)="upload($event)"
+      class="mb-4"
+    ></app-file-uploader>
+    <div class="flex flex-wrap">
+      <app-file-upload
+        class="mr-4"
+        *ngFor="let upload of uploads"
+        [file]="upload.file"
+        [progress]="upload.progress"
+      ></app-file-upload>
+    </div>
+  </div>
+</form> -->

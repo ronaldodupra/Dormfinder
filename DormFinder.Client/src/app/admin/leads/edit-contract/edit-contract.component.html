@@ -1,0 +1,21 @@
+<div *ngIf="contract">
+  <div class="p-4">
+    <div class="mat-elevation-z1 p-4 xl:w-1/2">
+      <h1 class="mat-headline">Edit Contract</h1>
+      <app-contract-form [contract]="contract"></app-contract-form>
+
+      <button
+        mat-flat-button
+        type="button"
+        (click)="editcontract()"
+        color="primary"
+        class="mr-2"
+      >
+        SAVE CHANGES
+      </button>
+      <button mat-stroked-button type="button" (click)="cancel()">
+        CANCEL
+      </button>
+    </div>
+  </div>
+</div>

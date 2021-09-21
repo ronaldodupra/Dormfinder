@@ -1,0 +1,125 @@
+<div class="mat-elevation-z1">
+  <form [formGroup]="form" (ngSubmit)="searchRoom()">
+    <div class="flex flex-wrap">
+      <div class="xl:w-1/2 md:w-1/2 sm:w-full p-2">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Search Room Location</mat-label>
+          <input
+            matInput
+            #autoTrigger="matAutocompleteTrigger"
+            type="text"
+            [matAutocomplete]="auto"
+            formControlName="search"
+            matInput
+          />
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              <mat-icon>location_on</mat-icon> {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="xl:w-1/2 md:w-1/2 sm:w-full">
+        <div class="flex flex-wrap">
+          <div class="w-2/5 p-2">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Min Price</mat-label>
+              <input
+                type="number"
+                formControlName="minPrice"
+                matInput
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="w-2/5 p-2">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Max Price</mat-label>
+              <input
+                type="number"
+                formControlName="maxPrice"
+                matInput
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="w-1/5">
+            <div class="p-4">
+              <button type="submit" mat-flat-button color="accent" class="h-12">
+                <mat-icon *ngIf="!loading">search</mat-icon>
+                <mat-icon class="animate-spin" *ngIf="loading">cached</mat-icon>
+              </button>
+              <button
+                (click)="cancelSearch()"
+                mat-raised-button
+                class="h-12"
+                *ngIf="isSearching"
+              >
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="flex align-center" *ngIf="isSearching">
+  <mat-icon>search</mat-icon>
+  <span class="font-bold"> Search Result {{ resultCount }} </span>
+</div>
+<div class="flex flex-wrap justify-center">
+  <ng-container
+    *ngFor="
+      let rentDetail of rents
+        | paginate: { itemsPerPage: 5, currentPage: pagination }
+    "
+  >
+    <div class="xl:w-1/5 sm:w-1/3 p-5">
+      <div class="mat-elevation-z1">
+        <div *ngIf="rentDetail.roomPics?.length > 0">
+          <ng-container *ngFor="let image of rentDetail.roomPics">
+            <ng-container *ngIf="image.isThumbnail">
+              <img
+                src="api/files/{{ image.fileEntryId }}"
+                class="w-full h-64"
+              />
+            </ng-container>
+          </ng-container>
+        </div>
+        <div *ngIf="rentDetail.roomPics?.length == 0">
+          <img src="assets/img/room_default_image.jpg" class="w-full h-64" />
+        </div>
+
+        <div class="p-4">
+          <div class="float-right">
+            <a
+              mat-stroked-button
+              color="primary"
+              [routerLink]="['/rent', rentDetail.id]"
+              >DETAILS</a
+            >
+          </div>
+          <div>
+            <h3 class="text-2xl">{{ rentDetail.roomName }}</h3>
+          </div>
+          <div class="text-sm">
+            <mat-icon class="">location_on</mat-icon>
+            <span class="text-sm"
+              >{{ rentDetail.building.address.province }},
+              {{ rentDetail.building.address.city }}</span
+            >
+          </div>
+          <div class="mb-2">₱ {{ rentDetail.basicRent | number: "0.2" }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="flex justify-center">
+  <pagination-controls (pageChange)="pagination = $event"></pagination-controls>
+</div>

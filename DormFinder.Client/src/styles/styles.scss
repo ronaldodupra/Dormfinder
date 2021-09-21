@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use "src/styles/old-code";
+@use "src/styles/theming";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "src/styles/custom";
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}

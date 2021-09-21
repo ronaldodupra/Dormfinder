@@ -1,0 +1,42 @@
+﻿@using DormFinder.Web.Models
+
+@model InviteUserModel
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .emphasis {
+            font-weight: bold;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 8px 16px;
+            color: white !important;
+            background-color: #01579b !important;
+            text-decoration: none !important;
+        }
+
+        .no-reply {
+            border-top: thin solid rgba(0, 0, 0, 0.17);
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <p>Hi @Model.FullName,</p>
+
+    <p>
+        You have been invited to register for a <span class="emphasis">DormFinder</span> Verify your email now.
+    </p>
+
+    <p>Please visit the link below to complete your verification.</p>
+    <a class="button-link" href="@Model.Url">VERIFY ACCOUNT</a>
+
+    <p class="no-reply">This is an automated email. Please do not reply to it.</p>
+</body>
+</html>

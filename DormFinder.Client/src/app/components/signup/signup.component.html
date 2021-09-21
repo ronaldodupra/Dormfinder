@@ -1,0 +1,136 @@
+<div class="center">
+  <mat-card class="card">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="register()"
+      autocomplete="off"
+      class="margin_bottom"
+    >
+      <h2>Register</h2>
+
+      <mat-radio-group class="full-width" formControlName="usertype">
+        <mat-radio-button *ngFor="let type of types" [value]="type">{{
+          type
+        }}</mat-radio-button>
+      </mat-radio-group>
+
+      <div class="flex -mx-2">
+        <div class="w-1/2">
+          <mat-form-field
+            class="w-full px-2"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstname" />
+            <mat-error>First name is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="w-1/2">
+          <mat-form-field
+            class="w-full px-2"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" formControlName="lastName" />
+            <mat-error>Last name is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="full-width" appearance="outline" color="accent">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="email@example.com"
+          type="text"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="form.get('email').hasError('required')"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="form.get('email').hasError('email')"
+          >Email is not a valid</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline" color="accent">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+        />
+
+        <button
+          class="mask"
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="form.get('password').hasError('required')"
+          >Password is required</mat-error
+        >
+        <mat-error *ngIf="form.get('password').hasError('minlength')"
+          >password must be at least 8 characters long</mat-error
+        >
+        <mat-hint>The Password must be at least 8 characters long</mat-hint>
+      </mat-form-field>
+
+      <button
+        mat-button
+        mat-flat-button
+        class="ml-3 btn-red right-btn row"
+        color="accent"
+        type="submit"
+      >
+        SIGN UP
+      </button>
+
+      <button
+        mat-button
+        mat-flat-button
+        class="ml-3 btn-red"
+        [routerLink]="['']"
+      >
+        Cancel
+      </button>
+    </form>
+
+    <mat-divider inset="true"></mat-divider>
+
+    <form
+      ngNoForm
+      id="external-account"
+      method="post"
+      action="https://localhost:5001/ExternalLogin?provider=Facebook"
+    >
+      <button class="fb btn" type="submit" name="provider" value="Facebook">
+        <i class="fa fa-facebook fa-fw"></i>Continue with Facebook
+      </button>
+    </form>
+
+    <form
+      ngNoForm
+      id="external-account"
+      method="post"
+      action="https://localhost:5001/ExternalLogin?provider=Google"
+    >
+      <button class="google btn" type="submit" name="provider" value="Google">
+        <i class="fa fa-google fa-fw"></i>Continue with Google
+      </button>
+    </form>
+
+    <span
+      >Already have an account?<a routerLink="/login" class="link">
+        Log In
+      </a></span
+    >
+  </mat-card>
+</div>

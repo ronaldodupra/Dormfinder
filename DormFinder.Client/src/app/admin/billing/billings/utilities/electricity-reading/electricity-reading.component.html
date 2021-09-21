@@ -1,0 +1,48 @@
+<div class="p-4">
+  <h1 class="mat-headline">Electricity</h1>
+
+  <div class="mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" class="w-full">
+      <ng-container matColumnDef="meterNo">
+        <th mat-header-cell *matHeaderCellDef>Meter No.</th>
+        <td mat-cell *matCellDef="let bill">{{ bill.meterNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="previousReading">
+        <th mat-header-cell *matHeaderCellDef>Previous Reading</th>
+        <td mat-cell *matCellDef="let bill">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              type="text"
+              value="{{ bill.previousReading }}"
+              disabled
+            />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currentReading">
+        <th mat-header-cell *matHeaderCellDef>Current Reading</th>
+        <td mat-cell *matCellDef="let bill; let index = index">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              type="number"
+              value="{{ bill.currentReading }}"
+              (input)="change($event.target.value, bill)"
+            />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div *ngIf="dataSource?.data.length === 0" class="app-no-data">
+      No readings found
+    </div>
+  </div>
+  <button mat-button (click)="saveChanges()">Save</button>
+</div>

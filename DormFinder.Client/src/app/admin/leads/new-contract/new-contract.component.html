@@ -1,0 +1,23 @@
+<div *ngIf="lead">
+  <div class="p-4">
+    <div class="mat-elevation-z1 p-4 xl:w-1/2">
+      <h1 class="mat-headline">Add Contract</h1>
+      <app-contract-form [lead]="lead"></app-contract-form>
+
+      <!-- <button mat-flat-button color="primary" type="submit">save</button> -->
+
+      <button
+        mat-flat-button
+        type="submit"
+        (click)="newContract()"
+        color="primary"
+        class="mr-2"
+      >
+        Save Contract
+      </button>
+      <button mat-stroked-button type="button" (click)="cancel()">
+        cancel
+      </button>
+    </div>
+  </div>
+</div>

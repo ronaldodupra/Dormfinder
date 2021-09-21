@@ -1,0 +1,82 @@
+<ng-container *ngIf="tenant != null">
+  <div class="p-4 mat-typography">
+    <h1 class="mat-headline">View Tenant</h1>
+
+    <div class="mat-elevation-z1 p-4 mb-4">
+      <h2>Personal Info</h2>
+
+      <p class="field">
+        <span class="field-label">Full Name</span>
+        <span class="field-value">{{ tenant.user.fullName }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Phone Number</span>
+        <span class="field-value">{{
+          tenant.user.phoneNumber | coalesce
+        }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Email</span>
+        <span class="field-value">{{ tenant.user.email | coalesce }}</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Address</span>
+        <span class="field-value">{{ tenant.user.address | coalesce }}</span>
+      </p>
+    </div>
+
+    <div class="mat-elevation-z1 p-4">
+      <h2>Lease</h2>
+
+      <p class="field">
+        <span class="field-label">Property/Unit</span>
+        <span class="field-value"
+          >{{ tenant.building.name }} / {{ tenant.room.unit }}</span
+        >
+      </p>
+
+      <p class="field">
+        <span class="field-label">Effective Date</span>
+        <span class="field-value">{{
+          tenant.contract.effectiveStartDate
+        }}</span>
+      </p>
+
+      <p>
+        <span class="field-label">Effectivity Ends</span>
+        <span class="field-value">
+          <ng-container
+            *ngIf="tenant.contract.effectiveEndDate; else indefinite"
+          >
+            {{ tenant.contract.effectiveEndDate }}
+          </ng-container>
+          <ng-template #indefinite>
+            <span class="italic">Indefinite</span>
+          </ng-template>
+        </span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Length of Stay</span>
+        <span class="field-value">8 months</span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Basic Rent</span>
+        <span class="field-value">
+          ₱ {{ tenant.contract.basicRent | amount }}
+        </span>
+      </p>
+
+      <p class="field">
+        <span class="field-label">Security Deposit</span>
+        <span class="field-value">
+          ₱ {{ tenant.contract.securityDeposit | amount }}
+        </span>
+      </p>
+    </div>
+  </div>
+</ng-container>

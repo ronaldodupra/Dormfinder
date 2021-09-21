@@ -1,0 +1,140 @@
+<form [formGroup]="form" class="mat-typography">
+  <div class="w-full center margin-bottom">
+    <img *ngIf="imageUrl" class="image" [src]="imageUrl" />
+  </div>
+
+  <div class="w-full center margin-bottom">
+    <input
+      type="file"
+      hidden="true"
+      #image
+      (change)="onSelect(image.files); image.value = null"
+      accept="image/jpeg,image/jpg,image/png,image/gif"
+    />
+
+    <button (click)="image.click()" type="button" mat-raised-button>
+      Upload Your Photo
+    </button>
+  </div>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" formControlName="firstName" required />
+      <mat-error>First Name is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="w-full">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName" required />
+      <mat-error>Last Name is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="w-full margin-bottom">
+    <div>
+      <mat-label>Gender</mat-label>
+    </div>
+    <mat-radio-group
+      aria-label="Gender"
+      formControlName="gender"
+      (change)="selectionChangeGender($event)"
+    >
+      <mat-radio-button [value]="'Male'">Male</mat-radio-button>
+      <mat-radio-button [value]="'Female'">Female</mat-radio-button>
+    </mat-radio-group>
+    <div class="error">
+      <ng-container *ngIf="genderInvalid === true">
+        *Gender is required
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="w-full margin-bottom">
+    <div>
+      <mat-label>Student</mat-label>
+    </div>
+    <mat-radio-group aria-label="Student" formControlName="student">
+      <mat-radio-button [value]="true">Yes</mat-radio-button>
+      <mat-radio-button [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="w-full" *ngIf="form.controls.student.value">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>School</mat-label>
+      <input matInput type="text" formControlName="school" />
+    </mat-form-field>
+  </div>
+
+  <div class="w-full" *ngIf="form.controls.student.value">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Course</mat-label>
+      <input matInput type="text" formControlName="course" />
+    </mat-form-field>
+  </div>
+
+  <mat-divider class="mb-4"></mat-divider>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <div class="flex -mx-2">
+      <div class="w-1/2">
+        <mat-form-field appearance="outline" class="w-full px-2">
+          <mat-label>City/Municipality</mat-label>
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="cityAuto"
+            formControlName="city"
+          />
+          <mat-autocomplete #cityAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let city of filteredCities | async"
+              [value]="city.description"
+            >
+              {{ city.description }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="w-1/2">
+        <mat-form-field appearance="outline" class="w-full px-2">
+          <mat-label>Province</mat-label>
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="provinceAuto"
+            formControlName="province"
+          />
+          <mat-autocomplete #provinceAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let province of filteredProvinces | async"
+              [value]="province.description"
+            >
+              {{ province.description }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Street Address</mat-label>
+        <input matInput type="text" formControlName="addressLine1" />
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Floor/Dept/Apartment</mat-label>
+        <input matInput type="text" formControlName="addressLine2" />
+      </mat-form-field>
+    </div>
+  </div>
+</form>

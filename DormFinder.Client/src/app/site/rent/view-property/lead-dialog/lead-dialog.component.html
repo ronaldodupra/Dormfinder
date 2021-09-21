@@ -1,0 +1,82 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="newlead()" autocomplete="off">
+    <h2>INQUIRE</h2>
+
+    <div class="flex -mx-2">
+      <div class="w-1/2">
+        <mat-form-field class="w-full px-2" appearance="outline" color="accent">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="firstname" />
+          <mat-error>First name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="w-1/2">
+        <mat-form-field class="w-full px-2" appearance="outline" color="accent">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" formControlName="lastName" />
+          <mat-error>Last name is required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- <mat-form-field class="full-width" appearance="outline" color="accent">
+      <mat-label>Address</mat-label>
+      <input matInput type="text" formControlName="address" />
+    </mat-form-field> -->
+
+    <div class="flex -mx-2">
+      <div class="w-1/2">
+        <mat-form-field class="w-full px-2" appearance="outline" color="accent">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="email@example.com"
+            type="text"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="form.get('email').hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="form.get('email').hasError('email')"
+            >Email is not a valid</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="w-1/2">
+        <mat-form-field class="w-full px-2" appearance="outline" color="accent">
+          <mat-label>Number</mat-label>
+          <input matInput type="text" formControlName="number" />
+          <mat-error>Number is required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field class="full-width" appearance="outline" color="accent">
+      <mat-label>Message</mat-label>
+      <textarea matInput type="text" formControlName="message"></textarea>
+    </mat-form-field>
+
+    <button
+      mat-button
+      mat-flat-button
+      class="ml-3 btn-red right-btn row"
+      color="accent"
+      type="submit"
+    >
+      SEND
+    </button>
+
+    <button
+      mat-button
+      mat-flat-button
+      type="button"
+      class="ml-3 btn-red"
+      (click)="closeDialog()"
+    >
+      Cancel
+    </button>
+  </form>
+</div>

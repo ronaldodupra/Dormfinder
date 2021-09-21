@@ -1,0 +1,73 @@
+<div class="p-4">
+  <div>
+    <h1 class="mat-headline">Charges</h1>
+    <a
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/', 'admin', 'charges', 'new']"
+    >
+      NEW CHARGE
+    </a>
+  </div>
+
+  <div class="mat-elevation-z1">
+    <table
+      mat-table
+      matSort
+      (matSortChange)="sortdata($event)"
+      [dataSource]="dataSource"
+      class="w-full mat-elevation-z2"
+    >
+      <ng-container matColumnDef="billingStatementOrder">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Billing Statement Order
+        </th>
+        <td mat-cell *matCellDef="let charge">
+          {{ charge.billingStatementOrder }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comments">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Comments</th>
+        <td mat-cell *matCellDef="let charge">{{ charge.comments }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="defaultCharge">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Default Charge
+        </th>
+        <td mat-cell *matCellDef="let charge">{{ charge.defaultCharge }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isVat">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Vat</th>
+        <td mat-cell *matCellDef="let charge">
+          {{ charge.isVat ? "Yes" : "No" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let charge">
+          <a
+            mat-icon-button
+            matTooltip="Edit"
+            [routerLink]="['/admin', 'charges', charge.id, 'edit']"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      (page)="page($event)"
+    ></mat-paginator>
+  </div>
+</div>

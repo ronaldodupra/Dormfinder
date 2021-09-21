@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a class="flex items-center" href="/">
+      <img src="assets/logo.png" class="_logo-image" />
+      <span>DormFinder</span>
+    </a>
+
+    <span class="_spacer"></span>
+
+    <img appImgFallback class="_organization-logo" />
+
+    <button mat-button [matMenuTriggerFor]="accountMenu">John Doe</button>
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item (click)="myAccount()">My Account</button>
+      <button mat-menu-item (click)="logout()">Log Out</button>
+    </mat-menu>
+    <button mat-icon-button color="accent">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

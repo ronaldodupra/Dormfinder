@@ -1,0 +1,56 @@
+<div class="p-4">
+  <h1 class="mat-headline">Tenants</h1>
+
+  <div class="mat-elevation-z1">
+    <table mat-table [dataSource]="dataSource" class="w-full">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let tenant">{{ tenant.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fullname">
+        <th mat-header-cell *matHeaderCellDef>Fullname</th>
+        <td mat-cell *matCellDef="let tenant">
+          {{ tenant.user.firstName }} {{ tenant.user.lastName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="property">
+        <th mat-header-cell *matHeaderCellDef>Unit/Property</th>
+        <td mat-cell *matCellDef="let tenant">{{ tenant.room.roomName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let tenant">
+          <a
+            mat-icon-button
+            matTooltip="View"
+            [routerLink]="['/admin', 'tenants', tenant.id]"
+          >
+            <mat-icon>visibility</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            matTooltip="Edit"
+            [routerLink]="['/admin', '/tenants', tenant.id, 'edit']"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div *ngIf="dataSource?.data.length === 0" class="app-no-data">
+      No tenants found
+    </div>
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [length]="totalCount"
+      (page)="page($event)"
+    ></mat-paginator>
+  </div>
+</div>
